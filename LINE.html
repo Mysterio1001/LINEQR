@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LINE QR Code Generator</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+<body>
+  <h1>LINE QR Code 生成器</h1>
+  <label for="lineId">輸入 LINE 帳號 ID：</label>
+  <input type="text" id="lineId" placeholder="請輸入 LINE 帳號 ID">
+  <button id="generateBtn">生成 QR Code</button>
+  <div id="qrcode" style="margin-top: 20px;"></div>
+
+  <script>
+    const generateBtn = document.getElementById('generateBtn');
+    const lineIdInput = document.getElementById('lineId');
+    const qrcodeContainer = document.getElementById('qrcode');
+
+    generateBtn.addEventListener('click', () => {
+      const lineId = lineIdInput.value.trim();
+      if (!lineId) {
+        alert('請輸入 LINE 帳號 ID');
+        return;
+      }
+      const lineUrl = `https://line.me/ti/p/~${lineId}`;
+      
+      // 清空之前的 QR Code
+      qrcodeContainer.innerHTML = '';
+      
+      // 生成新的 QR Code
+      QRCode.toCanvas(document.createElement('canvas'), lineUrl, { width: 200 }, (error, canvas) => {
+        if (error) {
+          console.error('QR Code 生成失敗', error);
+        } else {
+          // 將生成的 <canvas> 插入到 qrcodeContainer 中
+          qrcodeContainer.appendChild(canvas);
+          console.log('QR Code 生成成功');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
