@@ -17,7 +17,7 @@
     const generateBtn = document.getElementById('generateBtn');
     const lineIdInput = document.getElementById('lineId');
     const qrcodeContainer = document.getElementById('qrcode');
-
+ 
     generateBtn.addEventListener('click', () => {
       const lineId = lineIdInput.value.trim();
       if (!lineId) {
@@ -44,6 +44,7 @@
           qrcodeContainer.appendChild(link);
           link.appendChild(canvas);
           console.log('QR Code 生成成功');
+          lineIdInput.value = ''; //清除input內容
         }
       });
     });
