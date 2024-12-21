@@ -34,8 +34,15 @@
         if (error) {
           console.error('QR Code 生成失敗', error);
         } else {
-          // 將生成的 <canvas> 插入到 qrcodeContainer 中
-          qrcodeContainer.appendChild(canvas);
+
+          //生成一個<a>連結 直接連結到LINE好友加入(手機版本連到app)
+          const link = document.createElement('a');
+          link.href = lineUrl; 
+          link.target = '_blank'; //產生新視窗
+
+          // 將生成的 <canvas> 插入到 <a> 中
+          qrcodeContainer.appendChild(link);
+          link.appendChild(canvas);
           console.log('QR Code 生成成功');
         }
       });
